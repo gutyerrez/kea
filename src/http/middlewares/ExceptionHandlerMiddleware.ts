@@ -1,19 +1,14 @@
-import {
-  ErrorRequestHandler,
-  Request,
-  Response,
-  NextFunction
-} from 'express';
+// abstract that
+import { FastifyRequest as MiddlewareRequest, FastifyReply as MiddlewareResponse } from 'fastify';
 
 import { Exception } from '@gentifly/zeraph/exceptions';
 
-export const ExceptionHandlerMiddleware: ErrorRequestHandler = (
+export const ExceptionHandlerMiddleware = (
   error: Error,
-  _request: Request,
-  response: Response,
-  _next: NextFunction
+  _request: MiddlewareRequest,
+  response: MiddlewareResponse
 ) => {
-  return response.status(error instanceof Exception ? error.status : 500).json({
+  return response.status(error instanceof Exception ? error.status : 500).send({
     error: {
       'lang': i18n.getLocale(),
       'message': i18n.__(error.name),

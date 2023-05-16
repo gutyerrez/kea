@@ -24,20 +24,18 @@
   },
   "dependencies": {
     "@google-cloud/pubsub": "^3.5.2",
-    "@prisma/client": "^4.13.0",
-    "express": "^4.18.2",
+    "fastify": "^4.17.0",
     "i18n": "^0.15.1",
-    "jsonwebtoken": "^9.0.0"
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.1.1"
   },
   "devDependencies": {
-    "@somosprte/eslint-config-brlm-loyalty-engine": "^0.0.7-ALPHA",
-    "@types/express": "^4.17.17",
+    "@somosprte/eslint-config-brlm-loyalty-engine": "^0.0.8-ALPHA",
     "@types/i18n": "^0.13.6",
     "@types/jsonwebtoken": "^9.0.2",
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
-    "@prisma/client": ">=4.13.0",
     "i18n": ">=0.15.1"
   },
   "eslintConfig": {
@@ -62,8 +60,9 @@
     "./http/middlewares": "./dist/http/middlewares/index.js",
     "./http/middlewares/ExceptionHandlerMiddleware": "./dist/http/middlewares/ExceptionHandlerMiddleware.js",
     "./http/middlewares/InhabitantMiddleware": "./dist/http/middlewares/InhabitantMiddleware.js",
-    "./http/server/Request": "./dist/http/server/Request",
-    "./http/server/Response": "./dist/http/server/Response",
+    "./http/server": "./dist/http/server/index.js",
+    "./http/server/Request": "./dist/http/server/Request.js",
+    "./http/server/Response": "./dist/http/server/Response.js",
     "./http/router": "./dist/http/router/index.js",
     "./prototype": "./dist/prototype/index.js",
     "./prototype/array": "./dist/prototype/array/index.js",

@@ -1,132 +1,127 @@
+import { FastifyInstance, FastifyPluginOptions } from 'fastify';
+
 import fs from 'fs';
 import path from 'path';
 
-// TODO: turn it more abstract like as LSP (Liskov Substitution Principle)
-import {
-  Router as ExpressRouter,
-  Request as ExpressRequest,
-  Response as ExpressResponse,
-  RequestHandler
-} from 'express';
-
 import { IController } from '@gentifly/zeraph/http/controllers';
 
+import { Route } from '@gentifly/zeraph/http/router/data/Route';
+
 import {
-  Request,
   InhabitantRequest,
+  Request,
   Response
 } from '@gentifly/zeraph/http/server';
+
+import { ExceptionHandlerMiddleware, InhabitantMiddleware } from '@gentifly/zeraph/http/middlewares';
 
 import { Reflection } from '@gentifly/zeraph/utils/reflection';
 
 export class Router {
-  private static _routes = ExpressRouter({
-    strict: true,
-    caseSensitive: true
-  });
+  private static routes: Route[] = [];
 
   public static get = <T extends { new (...args: any[]): IController }> (
-    path: string | RegExp,
+    path: string,
     controllerInstance: T,
-    ...middlewares: RequestHandler[]
+    ...middlewares: any[]
   ): void => {
     const controller = Reflection.createInstance(controllerInstance);
 
-    Router._routes.get(path, middlewares, async (request: ExpressRequest, response: ExpressResponse) => {
-      return controller.handle(
-        request as Request & InhabitantRequest,
-        response as Response
-      );
+    this.routes.push({
+      path,
+      method: 'GET',
+      middlewares,
+      controller: controller
     });
   };
 
   public static head = <T extends { new (...args: any[]): IController }> (
-    path: string | RegExp,
+    path: string,
     controllerInstance: T,
-    ...middlewares: RequestHandler[]
+    ...middlewares: any[]
   ): void => {
     const controller = Reflection.createInstance(controllerInstance);
 
-    Router._routes.head(path, middlewares, async (request: ExpressRequest, response: ExpressResponse) => {
-      return controller.handle(
-        request as Request & InhabitantRequest,
-        response as Response
-      );
+    this.routes.push({
+      path,
+      method: 'HEAD',
+      middlewares,
+      controller: controller
     });
   };
 
   public static post = <T extends { new (...args: any[]): IController }> (
-    path: string | RegExp,
+    path: string,
     controllerInstance: T,
-    ...middlewares: RequestHandler[]
+    ...middlewares: any[]
   ): void => {
     const controller = Reflection.createInstance(controllerInstance);
 
-    Router._routes.post(path, middlewares, async (request: ExpressRequest, response: ExpressResponse) => {
-      return controller.handle(
-        request as Request & InhabitantRequest,
-        response as Response
-      );
+    this.routes.push({
+      path,
+      method: 'POST',
+      middlewares,
+      controller: controller
     });
   };
 
   public static put = <T extends { new (...args: any[]): IController }> (
-    path: string | RegExp,
+    path: string,
     controllerInstance: T,
-    ...middlewares: RequestHandler[]
+    ...middlewares: any[]
   ): void => {
     const controller = Reflection.createInstance(controllerInstance);
 
-    Router._routes.put(path, middlewares, async (request: ExpressRequest, response: ExpressResponse) => {
-      return controller.handle(
-        request as Request & InhabitantRequest,
-        response as Response
-      );
+    this.routes.push({
+      path,
+      method: 'PUT',
+      middlewares,
+      controller: controller
     });
   };
 
   public static patch = <T extends { new (...args: any[]): IController }> (
-    path: string | RegExp,
+    path: string,
     controllerInstance: T,
-    ...middlewares: RequestHandler[]
+    ...middlewares: any[]
   ): void => {
     const controller = Reflection.createInstance(controllerInstance);
 
-    Router._routes.patch(path, middlewares, async (request: ExpressRequest, response: ExpressResponse) => {
-      return controller.handle(
-        request as Request & InhabitantRequest,
-        response as Response
-      );
+    this.routes.push({
+      path,
+      method: 'PATCH',
+      middlewares,
+      controller: controller
     });
   };
 
   public static delete = <T extends { new (...args: any[]): IController }> (
-    path: string | RegExp,
+    path: string,
     controllerInstance: T,
-    ...middlewares: RequestHandler[]
+    ...middlewares: any[]
   ): void => {
     const controller = Reflection.createInstance(controllerInstance);
 
-    Router._routes.delete(path, middlewares, async (request: ExpressRequest, response: ExpressResponse) => {
-      return controller.handle(
-        request as Request & InhabitantRequest,
-        response as Response
-      );
+    this.routes.push({
+      path,
+      method: 'DELETE',
+      middlewares,
+      controller: controller
     });
   };
 
   public static options = <T extends { new (...args: any[]): IController }> (
-    path: string | RegExp,
+    path: string,
     controllerInstance: T,
-    ...middlewares: RequestHandler[]
+    ...middlewares: any[]
   ): void => {
     const controller = Reflection.createInstance(controllerInstance);
 
-    Router._routes.options(path, middlewares, async (request: ExpressRequest, response: ExpressResponse) => {
-      return controller.handle(
-        request as Request & InhabitantRequest,
-        response as Response
-      );
+    this.routes.push({
+      path,
+      method: 'OPTIONS',
+      middlewares,
+      controller: controller
     });
   };
 
@@ -144,9 +139,55 @@ export class Router {
     }
   }
 
-  public static get routes(): ExpressRouter {
+  public static router = async (fastify: FastifyInstance, _options: FastifyPluginOptions) => {
     Router.prepare(`${process.cwd()}/src`);
 
-    return Router._routes;
-  }
+    fastify.setErrorHandler(ExceptionHandlerMiddleware);
+
+    for (const route of this.routes) {
+      fastify.route({
+        method: route.method,
+        url: route.path,
+        handler: async (legacyRequest, legacyResponse) => {
+          const controller = route.controller;
+
+          const headers: Record<string, string> = {};
+          const params: Record<string, string> = {};
+          const query: Record<string, string> = {};
+
+          for (const header of Object.keys(legacyRequest.headers)) {
+            headers[header] = legacyRequest.headers[header]!.toString();
+          }
+
+          for (const param of Object.keys(legacyRequest.params as any)) {
+            params[param] = (legacyRequest.params as any)[param].toString();
+          }
+
+          for (const query of Object.keys(legacyRequest.query as any)) {
+            params[query] = (legacyRequest.query as any)[query].toString();
+          }
+
+          const request: Request = {
+            headers,
+            params,
+            query,
+            body: legacyRequest.body
+          };
+
+          const response = new Response();
+
+          if (route.middlewares.some(it => it == InhabitantMiddleware)) {
+            const inhabitantId = legacyRequest.headers['x-inhabitant-id']!.toString();
+
+            await controller.handle({ ...request, inhabitantId }, response);
+          } else {
+            await controller.handle(request as Request & InhabitantRequest, response);
+          }
+
+          return legacyResponse.status((response as any).statusCode).send((response as any).body);
+        },
+        preHandler: route.middlewares
+      });
+    }
+  };
 }

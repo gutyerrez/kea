@@ -1,9 +1,5 @@
-import {
-  RequestHandler,
-  Request,
-  Response,
-  NextFunction
-} from 'express';
+// abstract that
+import { FastifyRequest as Request, FastifyReply as Response } from 'fastify';
 
 import { Environment } from '@gentifly/zeraph/environment';
 
@@ -11,10 +7,10 @@ import { verify } from 'jsonwebtoken';
 
 import { UnauthorizedException } from '@gentifly/zeraph/exceptions';
 
-export const InhabitantMiddleware: RequestHandler = (
+export const InhabitantMiddleware = (
   request: Request,
   _response: Response,
-  next: NextFunction
+  next: any
 ) => {
   const accessToken = request.headers.authorization;
 
@@ -30,7 +26,7 @@ export const InhabitantMiddleware: RequestHandler = (
     if (payload instanceof Object) {
       const inhabitantId = payload['inhabitant_id'];
 
-      Object.assign(request, { inhabitantId });
+      request.headers['x-inhabitant-id'] = inhabitantId;
     }
   } catch {
     throw new UnauthorizedException('invalid jwt signature');

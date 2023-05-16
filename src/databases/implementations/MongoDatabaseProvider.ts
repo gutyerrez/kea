@@ -1,21 +1,20 @@
-import { PrismaClient } from '@prisma/client';
+import mongoose, { Connection } from 'mongoose';
 
-import { IDatabaseProvider } from '@gentifly/zeraph/databases/interfaces/IDatabaseProvider';
+import { IDatabaseProvider } from '@gentifly/zeraph/databases';
 
-export class MongoDatabaseProvider implements IDatabaseProvider<PrismaClient> {
-  private provider!: PrismaClient;
+import { Environment } from '@gentifly/zeraph/environment';
 
+export class MongoDatabaseProvider implements IDatabaseProvider<Connection> {
   public prepare = async (): Promise<void> => {
     try {
-      this.provider = new PrismaClient();
-
-      await this.provider.$connect();
+      mongoose.connect(Environment.getString('MONGO_URI'), {
+        maxPoolSize: 8,
+        minPoolSize: 4
+      });
     } catch (err) {
       console.log(err);
     }
   };
 
-  public provide = (): PrismaClient => {
-    return this.provider;
-  };
+  public provide = (): Connection => mongoose.connection;
 }

@@ -1,51 +1,51 @@
 declare module '@gentifly/zeraph/http/router' {
-  import { IController } from '@gentifly/zeraph/http/controllers';
+  import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 
-  import { RequestHandler, Router as ExpressRouter } from 'express';
+  import { IController } from '@gentifly/zeraph/http/controllers';
 
   export class Router {
     public static get: <T extends { new (...args: any[]): IController }> (
       path: string | RegExp,
       controllerInstance: T,
-      ...middlewares: RequestHandler[]
+      ...middlewares: any[]
     ) => void;
 
     public static head: <T extends { new (...args: any[]): IController }> (
       path: string | RegExp,
       controllerInstance: T,
-      ...middlewares: RequestHandler[]
+      ...middlewares: any[]
     ) => void;
 
     public static post: <T extends { new (...args: any[]): IController }> (
       path: string | RegExp,
       controllerInstance: T,
-      ...middlewares: RequestHandler[]
+      ...middlewares: any[]
     ) => void;
 
     public static put: <T extends { new (...args: any[]): IController }> (
       path: string | RegExp,
       controllerInstance: T,
-      ...middlewares: RequestHandler[]
+      ...middlewares: any[]
     ) => void;
 
     public static patch: <T extends { new (...args: any[]): IController }> (
       path: string | RegExp,
       controllerInstance: T,
-      ...middlewares: RequestHandler[]
+      ...middlewares: any[]
     ) => void;
 
     public static delete: <T extends { new (...args: any[]): IController }> (
       path: string | RegExp,
       controllerInstance: T,
-      ...middlewares: RequestHandler[]
+      ...middlewares: any[]
     ) => void;
 
     public static options: <T extends { new (...args: any[]): IController }> (
       path: string | RegExp,
       controllerInstance: T,
-      ...middlewares: RequestHandler[]
+      ...middlewares: any[]
     ) => void;
 
-    public static get routes(): ExpressRouter
+    public static router: (fastify: FastifyInstance, _options: FastifyPluginOptions) => Promise<void>;
   }
 }

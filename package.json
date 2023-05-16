@@ -1,0 +1,84 @@
+{
+  "name": "@gentifly/zeraph",
+  "version": "0.0.1-ALPHA",
+  "license": "MIT",
+  "type": "commonjs",
+  "typings": "@types/index.d.ts",
+  "author": {
+    "name": "Vinícius Gutierrez da Silva Rocha",
+    "email": "viniciusgutierrez@prte.com.br",
+    "url": "https://github.com/Gutyerrez"
+  },
+  "repository": {
+    "url": "git+https://github.com/gentifly/zeraph.git",
+    "type": "git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "engines": {
+    "node": "v20.x.x"
+  },
+  "scripts": {
+    "build": "sh scripts/build.sh"
+  },
+  "dependencies": {
+    "@google-cloud/pubsub": "^3.5.2",
+    "@prisma/client": "^4.13.0",
+    "express": "^4.18.2",
+    "i18n": "^0.15.1",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {
+    "@somosprte/eslint-config-brlm-loyalty-engine": "^0.0.7-ALPHA",
+    "@types/express": "^4.17.17",
+    "@types/i18n": "^0.13.6",
+    "@types/jsonwebtoken": "^9.0.2",
+    "typescript": "^5.0.4"
+  },
+  "peerDependencies": {
+    "@prisma/client": ">=4.13.0",
+    "i18n": ">=0.15.1"
+  },
+  "eslintConfig": {
+    "extends": "@somosprte/eslint-config-brlm-loyalty-engine",
+    "rules": {
+      "@typescript-eslint/no-explicit-any": "off"
+    }
+  },
+  "exports": {
+    "./container": "./dist/container/index.js",
+    "./databases": "./dist/databases/index.js",
+    "./databases/container": "./dist/databases/container/index.js",
+    "./databases/implementations/MongoDatabaseProvider": "./dist/databases/implementations/MongoDatabaseProvider.js",
+    "./environment": "./dist/environment/index.js",
+    "./environment/exceptions/EnvironmentFileNotFoundException": "./dist/environment/exceptions/EnvironmentFileNotFoundException.js",
+    "./environment/exceptions/EnvironmentNotFoundException": "./dist/environment/exceptions/EnvironmentNotFoundException.js",
+    "./exceptions": "./dist/exceptions/index.js",
+    "./exceptions/UnauthorizedException": "./dist/exceptions/UnauthorizedException.js",
+    "./exceptions/InhabitantNotFoundException": "./dist/exceptions/InhabitantNotFoundException.js",
+    "./exceptions/NotImplementedException": "./dist/exceptions/NotImplementedException.js",
+    "./translator": "./dist/translator/index.js",
+    "./http/middlewares": "./dist/http/middlewares/index.js",
+    "./http/middlewares/ExceptionHandlerMiddleware": "./dist/http/middlewares/ExceptionHandlerMiddleware.js",
+    "./http/middlewares/InhabitantMiddleware": "./dist/http/middlewares/InhabitantMiddleware.js",
+    "./http/server/Request": "./dist/http/server/Request",
+    "./http/server/Response": "./dist/http/server/Response",
+    "./http/router": "./dist/http/router/index.js",
+    "./prototype": "./dist/prototype/index.js",
+    "./prototype/array": "./dist/prototype/array/index.js",
+    "./prototype/array/implementations/array.last": "./dist/prototype/array/implementations/array.last.js",
+    "./messaging": "./dist/messaging/index.js",
+    "./messaging/container": "./dist/messaging/container/index.js",
+    "./messaging/data/Message": "./dist/messaging/data/Message.js",
+    "./messaging/data/PubSubMessage": "./dist/messaging/data/PubSubMessage.js",
+    "./messaging/interfaces/IMessageProvider": "./dist/messaging/interfaces/IMessageProvider.js",
+    "./messaging/implementations/PubSubMessageProvider": "./dist/messaging/implementations/PubSubMessageProvider.js",
+    "./utils/formatters": "./dist/utils/formatters/index.js",
+    "./utils/formatters/interfaces": "./dist/utils/formatters/interfaces/IDataFormatter.js",
+    "./utils/formatters/implementations/DataFormatter": "./dist/utils/formatters/implementations/DataFormatter.js",
+    "./utils/formatters/implementations/ListDataFormatter": "./dist/utils/formatters/implementations/ListDataFormatter.js",
+    "./utils/formatters/schemas": "./dist/utils/formatters/schemas/index.js",
+    "./utils/reflection": "./dist/utils/reflection/index.js"
+  }
+}

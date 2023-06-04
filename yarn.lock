@@ -65,6 +65,16 @@
   dependencies:
     fast-json-stringify "^5.7.0"
 
+"@gentifly/eslint-config@^0.0.1-ALPHA":
+  version "0.0.1-ALPHA"
+  resolved "https://registry.yarnpkg.com/@gentifly/eslint-config/-/eslint-config-0.0.1-ALPHA.tgz#1322f5f7be0fd829e5353546abde32fa3a792edc"
+  integrity sha512-cCJUcAjAJgm6CJMYWM8HKeGCs12cb82K4DJi9JZP0k5AhrEa0MKJ19lQZ2h/RtZr8CXnwXSzy2ij10CWvOaNDA==
+  dependencies:
+    "@typescript-eslint/eslint-plugin" "^5.57.1"
+    "@typescript-eslint/parser" "^5.57.1"
+    eslint "^8.37.0"
+    eslint-plugin-import-newlines "^1.3.1"
+
 "@google-cloud/paginator@^4.0.0":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@google-cloud/paginator/-/paginator-4.0.1.tgz#5fb8793d4f84d18c50a6f2fad3dadab8d2c533ef"
@@ -274,16 +284,6 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
-
-"@somosprte/eslint-config-brlm-loyalty-engine@^0.0.8-ALPHA":
-  version "0.0.8-ALPHA"
-  resolved "https://npm.pkg.github.com/download/@somosprte/eslint-config-brlm-loyalty-engine/0.0.8-ALPHA/3a99963911c9d89d9698e080eebc24e8585fa8e2#3a99963911c9d89d9698e080eebc24e8585fa8e2"
-  integrity sha512-HTuf7mmFi3xazQKVsnzi8fLMfMRFWIw5NPZBS20/8zVjfsy3tvtzcWEitu+yf61AQ3FsqFjDBu8kr3wIY2IYsQ==
-  dependencies:
-    "@typescript-eslint/eslint-plugin" "^5.57.1"
-    "@typescript-eslint/parser" "^5.57.1"
-    eslint "^8.37.0"
-    eslint-plugin-import-newlines "^1.3.1"
 
 "@types/duplexify@^3.6.0":
   version "3.6.1"

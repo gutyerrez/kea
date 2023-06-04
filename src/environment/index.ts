@@ -1,7 +1,5 @@
 import { readFileSync, existsSync } from 'fs';
 
-import { EnvironmentFileNotFoundException } from '@gentifly/zeraph/environment/exceptions/EnvironmentFileNotFoundException';
-
 import { EnvironmentNotFoundException } from '@gentifly/zeraph/environment/exceptions/EnvironmentNotFoundException';
 
 export class Environment {
@@ -13,7 +11,7 @@ export class Environment {
 
   private static readEnvironmentFile() {
     if (!existsSync(Environment.ENVIRONMENT_FILE)) {
-      throw new EnvironmentFileNotFoundException();
+      return;
     }
 
     const variables = readFileSync(Environment.ENVIRONMENT_FILE).toString().split(/\n/);

@@ -1,12 +1,13 @@
 {
   "name": "@gentifly/zeraph",
-  "version": "0.0.1-ALPHA",
+  "version": "0.0.4-ALPHA",
   "license": "MIT",
   "type": "commonjs",
-  "typings": "@types/index.d.ts",
+  "types": "@types/index.d.ts",
+  "private": false,
   "author": {
     "name": "Vinícius Gutierrez da Silva Rocha",
-    "email": "viniciusgutierrez@prte.com.br",
+    "email": "srgutyerrez@gmail.com",
     "url": "https://github.com/Gutyerrez"
   },
   "repository": {
@@ -14,7 +15,9 @@
     "type": "git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org",
+    "access": "public",
+    "tag": "latest"
   },
   "engines": {
     "node": "v20.x.x"
@@ -30,7 +33,7 @@
     "mongoose": "^7.1.1"
   },
   "devDependencies": {
-    "@somosprte/eslint-config-brlm-loyalty-engine": "^0.0.8-ALPHA",
+    "@gentifly/eslint-config": "^0.0.1-ALPHA",
     "@types/i18n": "^0.13.6",
     "@types/jsonwebtoken": "^9.0.2",
     "typescript": "^5.0.4"
@@ -39,7 +42,7 @@
     "i18n": ">=0.15.1"
   },
   "eslintConfig": {
-    "extends": "@somosprte/eslint-config-brlm-loyalty-engine",
+    "extends": "@gentifly/eslint-config",
     "rules": {
       "@typescript-eslint/no-explicit-any": "off"
     }

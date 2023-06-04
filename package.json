@@ -23,7 +23,8 @@
     "node": "v20.x.x"
   },
   "scripts": {
-    "build": "sh scripts/build.sh"
+    "build": "sh scripts/build.sh",
+    "test": "node --test"
   },
   "dependencies": {
     "@google-cloud/pubsub": "^3.5.2",

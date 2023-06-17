@@ -65,10 +65,10 @@
   dependencies:
     fast-json-stringify "^5.7.0"
 
-"@gentifly/eslint-config@^0.0.1-ALPHA":
-  version "0.0.1-ALPHA"
-  resolved "https://registry.yarnpkg.com/@gentifly/eslint-config/-/eslint-config-0.0.1-ALPHA.tgz#1322f5f7be0fd829e5353546abde32fa3a792edc"
-  integrity sha512-cCJUcAjAJgm6CJMYWM8HKeGCs12cb82K4DJi9JZP0k5AhrEa0MKJ19lQZ2h/RtZr8CXnwXSzy2ij10CWvOaNDA==
+"@gentifly/eslint-config@^0.0.2-ALPHA":
+  version "0.0.2-ALPHA"
+  resolved "https://registry.yarnpkg.com/@gentifly/eslint-config/-/eslint-config-0.0.2-ALPHA.tgz#04815d8b95fd372cd1232e9b9474bdc3323c70e5"
+  integrity sha512-IRIdd7Vjxa4DTMwxhQMdYFZXQYSVkF6GmLNZ0ahRC6xg2JXMX7ejQgq681VHOrKUfeM94dZCZWf/Grwms6csdA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.57.1"
     "@typescript-eslint/parser" "^5.57.1"

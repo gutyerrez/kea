@@ -2,7 +2,6 @@
 /// <reference path="./exceptions.d.ts" />
 /// <reference path="./providers.d.ts" />
 /// <reference path="./translator.d.ts" />
-/// <reference path="./messaging.d.ts" />
 /// <reference path="./middlewares.d.ts" />
 /// <reference path="./server.d.ts" />
 /// <reference path="./controllers.d.ts" />

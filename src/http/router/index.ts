@@ -7,11 +7,9 @@ import { IController } from '@gentifly/zeraph/http/controllers';
 
 import { Route } from '@gentifly/zeraph/http/router/data/Route';
 
-import {
-  InhabitantRequest,
-  Request,
-  Response
-} from '@gentifly/zeraph/http/server';
+import { Method } from '@gentifly/zeraph/http/router/enums/Method';
+
+import { Request, Response } from '@gentifly/zeraph/http/server';
 
 import { ExceptionHandlerMiddleware, InhabitantMiddleware } from '@gentifly/zeraph/http/middlewares';
 
@@ -29,7 +27,7 @@ export class Router {
 
     this.routes.push({
       path,
-      method: 'GET',
+      method: Method.GET,
       middlewares,
       controller: controller
     });
@@ -44,7 +42,7 @@ export class Router {
 
     this.routes.push({
       path,
-      method: 'HEAD',
+      method: Method.HEAD,
       middlewares,
       controller: controller
     });
@@ -59,7 +57,7 @@ export class Router {
 
     this.routes.push({
       path,
-      method: 'POST',
+      method: Method.POST,
       middlewares,
       controller: controller
     });
@@ -74,7 +72,7 @@ export class Router {
 
     this.routes.push({
       path,
-      method: 'PUT',
+      method: Method.PUT,
       middlewares,
       controller: controller
     });
@@ -89,7 +87,7 @@ export class Router {
 
     this.routes.push({
       path,
-      method: 'PATCH',
+      method: Method.PATCH,
       middlewares,
       controller: controller
     });
@@ -104,7 +102,7 @@ export class Router {
 
     this.routes.push({
       path,
-      method: 'DELETE',
+      method: Method.DELETE,
       middlewares,
       controller: controller
     });
@@ -119,7 +117,7 @@ export class Router {
 
     this.routes.push({
       path,
-      method: 'OPTIONS',
+      method: Method.OPTIONS,
       middlewares,
       controller: controller
     });
@@ -177,11 +175,9 @@ export class Router {
           const response = new Response();
 
           if (route.middlewares.some(it => it == InhabitantMiddleware)) {
-            const inhabitantId = legacyRequest.headers['x-inhabitant-id']!.toString();
-
-            await controller.handle({ ...request, inhabitantId }, response);
+            await controller.handle({ ...request }, response);
           } else {
-            await controller.handle(request as Request & InhabitantRequest, response);
+            await controller.handle(request, response);
           }
 
           return legacyResponse.status((response as any).statusCode).send((response as any).body);

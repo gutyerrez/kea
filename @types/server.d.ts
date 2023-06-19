@@ -6,10 +6,6 @@ declare module '@gentifly/zeraph/http/server' {
     headers: Record<string, string>;
   };
 
-  export type InhabitantRequest = Request & {
-    inhabitantId: string
-  }
-
   export class Response {
     public status: (code: number) => Response;
 

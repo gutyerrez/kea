@@ -1,7 +1,7 @@
 import { Exception } from '@gentifly/zeraph/exceptions';
 
 export class EnvironmentNotFoundException extends Exception {
-  constructor() {
-    super('EnvironmentNotFound', 'environment not found', 404);
+  constructor(name: keyof NodeJS.ProcessEnv) {
+    super('EnvironmentNotFound', `environment ${name} not found`, 404);
   }
 }

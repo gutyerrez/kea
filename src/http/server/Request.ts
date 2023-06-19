@@ -4,7 +4,3 @@ export type Request = {
   query: Record<string, string>;
   headers: Record<string, string>;
 };
-
-export type InhabitantRequest = Request & {
-  inhabitantId: string
-}

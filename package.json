@@ -1,6 +1,7 @@
 {
   "name": "@gentifly/zeraph",
-  "version": "0.0.4-ALPHA",
+  "version": "1.0.0",
+  "description": "Core framework used by Gentifly",
   "license": "MIT",
   "type": "commonjs",
   "types": "@types/index.d.ts",
@@ -33,7 +34,7 @@
     "mongoose": "^7.1.1"
   },
   "devDependencies": {
-    "@gentifly/eslint-config": "^0.0.2-ALPHA",
+    "@gentifly/eslint-config": "^0.0.3-ALPHA",
     "@types/i18n": "^0.13.6",
     "@types/jsonwebtoken": "^9.0.2",
     "typescript": "^5.0.4"

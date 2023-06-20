@@ -1,4 +1,3 @@
-/// <reference path="./environment.d.ts" />
 /// <reference path="./exceptions.d.ts" />
 /// <reference path="./providers.d.ts" />
 /// <reference path="./translator.d.ts" />

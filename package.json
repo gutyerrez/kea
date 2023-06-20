@@ -27,7 +27,9 @@
     "build": "sh scripts/build.sh"
   },
   "dependencies": {
-    "@google-cloud/pubsub": "^3.5.2",
+    "@gentifly/environment": "^1.0.0",
+    "@gentifly/exceptions": "^1.1.0",
+    "@prisma/client": "^4.15.0",
     "fastify": "^4.17.0",
     "i18n": "^0.15.1",
     "jsonwebtoken": "^9.0.0",

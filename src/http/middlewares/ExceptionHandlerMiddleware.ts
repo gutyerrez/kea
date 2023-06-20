@@ -1,7 +1,6 @@
-// abstract that
 import { FastifyRequest as MiddlewareRequest, FastifyReply as MiddlewareResponse } from 'fastify';
 
-import { Exception } from '@gentifly/zeraph/exceptions';
+import { Exception } from '@gentifly/exceptions';
 
 export const ExceptionHandlerMiddleware = (
   error: Error,

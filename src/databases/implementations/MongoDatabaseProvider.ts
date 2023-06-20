@@ -2,7 +2,7 @@ import mongoose, { Connection } from 'mongoose';
 
 import { IDatabaseProvider } from '@gentifly/zeraph/databases';
 
-import { Environment } from '@gentifly/zeraph/environment';
+import { Environment } from '@gentifly/environment';
 
 export class MongoDatabaseProvider implements IDatabaseProvider<Connection> {
   public prepare = async (): Promise<void> => {

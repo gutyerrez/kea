@@ -1,4 +1,4 @@
-import { Exception } from '@gentifly/zeraph/exceptions';
+import { Exception } from '@gentifly/exceptions';
 
 export class FileNotFoundException extends Exception {
   constructor(message = 'File not found') {

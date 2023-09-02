@@ -33,7 +33,7 @@
     "fastify": "^4.17.0",
     "i18n": "^0.15.1",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.1.1"
+    "mongoose": "^7.5.0"
   },
   "devDependencies": {
     "@gentifly/eslint-config": "^0.0.3-ALPHA",
